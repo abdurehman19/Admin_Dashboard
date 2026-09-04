@@ -1,0 +1,363 @@
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  position: fixed;
+
+  top: 0;
+  right: 0;
+
+  left: 250px;
+
+  height: 75px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e8e8e8;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 25px;
+
+  z-index: 900;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   LEFT
+========================= */
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+
+  gap: 20px;
+}
+
+
+/* =========================
+   MENU BUTTON
+========================= */
+
+.menu-btn {
+  display: none;
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  background: transparent;
+
+  border-radius: 8px;
+
+  font-size: 22px;
+
+  color: #555;
+
+  cursor: pointer;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-btn:hover {
+  background: #f5f5f5;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box {
+  width: 280px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 14px;
+
+  background: #f8f9fa;
+
+  border: 1px solid #eeeeee;
+
+  border-radius: 8px;
+
+  box-sizing: border-box;
+}
+
+.search-box svg {
+  color: #888;
+
+  font-size: 18px;
+
+  flex-shrink: 0;
+}
+
+.search-box input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  font-size: 13px;
+
+  color: #333;
+}
+
+.search-box input::placeholder {
+  color: #999;
+}
+
+
+/* =========================
+   RIGHT
+========================= */
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+
+  gap: 20px;
+}
+
+
+/* =========================
+   ICON BUTTON
+========================= */
+
+.navbar-icon {
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+
+  background: transparent;
+
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #666;
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+.navbar-icon:hover {
+  background: #f5f5f5;
+}
+
+
+/* =========================
+   NOTIFICATION DOT
+========================= */
+
+.notification-dot {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  width: 7px;
+  height: 7px;
+
+  background: #5e35b1;
+
+  border-radius: 50%;
+
+  border: 2px solid white;
+}
+
+
+/* =========================
+   USER
+========================= */
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding-left: 10px;
+
+  border-left: 1px solid #eeeeee;
+}
+
+
+/* =========================
+   AVATAR
+========================= */
+
+.user-avatar {
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  background: #ede7f6;
+
+  color: #5e35b1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   USER INFO
+========================= */
+
+.user-info h4 {
+  margin: 0;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  color: #333;
+}
+
+.user-info span {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 10px;
+
+  color: #999;
+}
+
+
+/* =========================
+   MOBILE USER ICON
+========================= */
+
+.user-mobile-icon {
+  display: none;
+
+  font-size: 20px;
+
+  color: #666;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .navbar {
+    left: 230px;
+  }
+
+  .search-box {
+    width: 220px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    left: 0;
+
+    height: 65px;
+
+    padding: 0 15px;
+  }
+
+  .menu-btn {
+    display: flex;
+  }
+
+  .search-box {
+    width: 200px;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .navbar {
+    padding: 0 10px;
+  }
+
+  .navbar-left {
+    gap: 5px;
+  }
+
+  .search-box {
+    width: 150px;
+  }
+
+  .search-box input {
+    font-size: 12px;
+  }
+
+  .navbar-right {
+    gap: 5px;
+  }
+
+  .navbar-user {
+    display: none;
+  }
+
+  .user-mobile-icon {
+    display: block;
+  }
+
+  .navbar-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+}
+
+
+/* =========================
+   VERY SMALL MOBILE
+========================= */
+
+@media (max-width: 360px) {
+
+  .search-box {
+    width: 130px;
+  }
+
+  .search-box input {
+    width: 80px;
+  }
+
+}
