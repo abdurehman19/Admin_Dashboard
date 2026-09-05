@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FiPlus, FiSearch, FiEdit2, FiTrash2, FiX } from "react-icons/fi";
+import {
+  FiPlus,
+  FiSearch,
+  FiEdit2,
+  FiTrash2,
+  FiX,
+} from "react-icons/fi";
 import "./Products.css";
 
 const API_URL =
@@ -10,6 +16,16 @@ const Products = () => {
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
 
+  const [form, setForm] = useState({
+    name: "",
+    category: "",
+    price: "",
+    stock: "",
+    image: "",
+    description: "",
+  });
+
+  // Get Products
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
@@ -19,6 +35,50 @@ const Products = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  // Add Product
+  const addProduct = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: form.name,
+          category: form.category,
+          price: Number(form.price),
+          stock: Number(form.stock),
+          image: [form.image],
+          description: form.description,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setProducts([...products, data.product]);
+        setShowForm(false);
+
+        setForm({
+          name: "",
+          category: "",
+          price: "",
+          stock: "",
+          image: "",
+          description: "",
+        });
+      } else {
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Search
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -42,7 +102,7 @@ const Products = () => {
         </button>
       </div>
 
-      {/* Products */}
+      {/* Products Card */}
       <div className="products-card">
 
         <div className="products-card-top">
@@ -96,11 +156,8 @@ const Products = () => {
                   </td>
 
                   <td>{product.category}</td>
-
                   <td>${product.price}</td>
-
                   <td>{product.stock}</td>
-
                   <td>★ {product.rating}</td>
 
                   <td>
@@ -137,24 +194,67 @@ const Products = () => {
               </button>
             </div>
 
-            <input type="text" placeholder="Product Name" />
+            <input
+              type="text"
+              placeholder="Product Name"
+              value={form.name}
+              onChange={(e) =>
+                setForm({ ...form, name: e.target.value })
+              }
+            />
 
-            <input type="text" placeholder="Category" />
+            <input
+              type="text"
+              placeholder="Category"
+              value={form.category}
+              onChange={(e) =>
+                setForm({ ...form, category: e.target.value })
+              }
+            />
 
-            <input type="number" placeholder="Price" />
+            <input
+              type="number"
+              placeholder="Price"
+              value={form.price}
+              onChange={(e) =>
+                setForm({ ...form, price: e.target.value })
+              }
+            />
 
-            <input type="number" placeholder="Stock" />
+            <input
+              type="number"
+              placeholder="Stock"
+              value={form.stock}
+              onChange={(e) =>
+                setForm({ ...form, stock: e.target.value })
+              }
+            />
 
-            <input type="text" placeholder="Image URL" />
+            <input
+              type="text"
+              placeholder="Image URL"
+              value={form.image}
+              onChange={(e) =>
+                setForm({ ...form, image: e.target.value })
+              }
+            />
 
-            <textarea placeholder="Description"></textarea>
+            <textarea
+              placeholder="Description"
+              value={form.description}
+              onChange={(e) =>
+                setForm({ ...form, description: e.target.value })
+              }
+            />
 
-            <button className="save-product-btn">
+            <button
+              className="save-product-btn"
+              onClick={addProduct}
+            >
               Add Product
             </button>
 
           </div>
-
         </div>
       )}
 
