@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Products from "./pages/Products";
 import Users from "./pages/Users";
 import Orders from "./pages/Orders";
+import './App.css'
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
