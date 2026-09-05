@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FiPlus, FiSearch, FiEdit2, FiTrash2 } from "react-icons/fi";
+import { FiPlus, FiSearch, FiEdit2, FiTrash2, FiX } from "react-icons/fi";
 import "./Products.css";
 
 const API_URL =
@@ -8,11 +8,14 @@ const API_URL =
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
-      .then((data) => setProducts(data.products))
+      .then((data) => {
+        setProducts(data.products);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -23,18 +26,23 @@ const Products = () => {
   return (
     <div className="products-page">
 
+      {/* Header */}
       <div className="products-header">
         <div>
           <h1>Products</h1>
           <p>Manage your products and inventory</p>
         </div>
 
-        <button className="add-product-btn">
+        <button
+          className="add-product-btn"
+          onClick={() => setShowForm(true)}
+        >
           <FiPlus />
           Add Product
         </button>
       </div>
 
+      {/* Products */}
       <div className="products-card">
 
         <div className="products-card-top">
@@ -56,7 +64,6 @@ const Products = () => {
         </div>
 
         <div className="products-table-wrapper">
-
           <table className="products-table">
 
             <thead>
@@ -113,9 +120,44 @@ const Products = () => {
             </tbody>
 
           </table>
-
         </div>
       </div>
+
+      {/* Add Product Form */}
+      {showForm && (
+        <div className="form-overlay">
+
+          <div className="product-form">
+
+            <div className="form-header">
+              <h2>Add Product</h2>
+
+              <button onClick={() => setShowForm(false)}>
+                <FiX />
+              </button>
+            </div>
+
+            <input type="text" placeholder="Product Name" />
+
+            <input type="text" placeholder="Category" />
+
+            <input type="number" placeholder="Price" />
+
+            <input type="number" placeholder="Stock" />
+
+            <input type="text" placeholder="Image URL" />
+
+            <textarea placeholder="Description"></textarea>
+
+            <button className="save-product-btn">
+              Add Product
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
     </div>
   );
 };
